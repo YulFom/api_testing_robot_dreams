@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "d765a47c-9dc1-4b5e-8c9d-5559131b83b8",
+		"name": "Test Goals",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14752142"
+	},
+	"item": [
+		{
+			"name": "Get Goals",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/team/{{team_id}}/goal?include_completed=true",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"team",
+						"{{team_id}}",
+						"goal"
+					],
+					"query": [
+						{
+							"key": "include_completed",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Goal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"goal_id_1\", jsonData.goal.id);",
+							"console.log(pm.collectionVariables.get(\"goal_id_1\"));",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Some test goal J\",\n\"due_date\": 1568036964079,\n\"description\": \"Goal Description\",\n\"multiple_owners\": true,\n\"owners\": [\n\n],\n\"color\": \"#32a852\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/team/9015694421/goal",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"team",
+						"9015694421",
+						"goal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Created Goal",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/goal/{{goal_id_1}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"goal",
+						"{{goal_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Goal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"name\": \"Some Updated Goal Name\",\n  \"description\": \"Updated Goal Description\",\n  \"rem_owners\": [\n    \n  ],\n  \"add_owners\": [\n    \n  ],\n  \"color\": \"#32a852\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/goal/{{goal_id_1}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"goal",
+						"{{goal_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Goal",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/goal/{{goal_id_1}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"goal",
+						"{{goal_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Key Result",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"key_result_id\", jsonData.key_result.id);",
+							"pm.environment.set(\"key_result_id\", jsonData.key_result.id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"New Key Result Name\",\n  \"owners\": [\n    \n  ],\n  \"type\": \"number\",\n  \"steps_start\": 0,\n  \"steps_end\": 10,\n  \"unit\": \"km\",\n  \"task_ids\": [],\n  \"list_ids\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/goal/{{goal_id_1}}/key_result",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"goal",
+						"{{goal_id_1}}",
+						"key_result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Key Result",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"steps_current\": 5,\n  \"note\": \"Target achieved\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/key_result/{{key_result_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"key_result",
+						"{{key_result_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Key Result",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.get(\"variable_key\");",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "pk_74462912_X149LTK9735ZKMM8ESLA7L2MUC1BZ18M",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.clickup.com/api/v2/key_result/{{key_result_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"clickup",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"key_result",
+						"{{key_result_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "key_result_id",
+			"value": ""
+		},
+		{
+			"key": "team_id",
+			"value": "9015694421",
+			"type": "string"
+		},
+		{
+			"key": "goal_id_1",
+			"value": ""
+		}
+	]
+}
